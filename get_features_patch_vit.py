@@ -10,13 +10,14 @@ from lang_sam import LangSAM
 from PIL import Image as PIL_Image
 from vit_patching.models.patch_ablation_utils import PatchMaster
 from vit_patching.models import vision_transformer
+## The ViT patch code was referred from https://github.com/MadryLab/missingness/tree/master/src 
 from tqdm import tqdm
 from pathlib import Path
 
 import configargparse
 
 parser = configargparse.ArgumentParser()
-parser.add_argument("-dataset_common_objects_df_path", "--dataset_common_objects_df_path", type=str)
+parser.add_argument("-df_path", "--df_path", type=str)
 parser.add_argument("-img_dir", "--img_dir",type=str)
 parser.add_argument("--do_obj_seg", action="store_true")
 parser.add_argument("--use_compliment_for_BG", action="store_true")
