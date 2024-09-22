@@ -30,6 +30,17 @@ This file matches the structure of the prompt csv.
 'model_name': which model to use; `vit_base_patch16_224` is the default
 ```
 
+Sample command to extract patch ViT features for Obj segmented part of image:
+
+```
+python get_features_patch_vit.py --df_path "/home/asureddy_umass_edu/DIG-In/data/geode_prompts_regions_only_balanceddataset_processed.csv" --img_dir "/work/pi_dhruveshpate_umass_edu/project_21/data/generated-data/LDM-1-5/geode_prompts_regions_balanceddataset" --do_obj_seg --save_path "data_sample2.pkl" --use_compliment_for_BG
+```
+
+Sample command to extract patch ViT features for BG segmented part of image:
+
+```
+python get_features_patch_vit.py --df_path "/home/asureddy_umass_edu/DIG-In/data/geode_prompts_regions_only_balanceddataset_processed.csv" --img_dir "/work/pi_dhruveshpate_umass_edu/project_21/data/generated-data/LDM-1-5/geode_prompts_regions_balanceddataset" --save_path "data_sample2.pkl" --use_compliment_for_BG
+```
 
 > Note, if you use the path `{features_folder}/{which_dataset}_prompts_[regions/countries]_fulldataset_{which_model}_{which_features}_[obj/bg]_deduped.pkl` for saving your features then you should be able to go to the next step without updating df paths.
 
@@ -39,19 +50,22 @@ These scripts require a pointer to the pickle of image features created in the p
 This script can be run with the following arguments to calculate respective Indicators:
 1. Region Indicator: 
 ```
-which_model=[MODEL NAME]
 k_PR=3 
 which_metric=pergroup_pr 
-which_features==inceptionv3 
-which_dataset=[geode/ds]
+ref_features_path = path of referrence image features
+gen_features_path = path of generated image features
+save_metrics_path = compute metrics save path
+remove_unmasked_geode = if true, removes reference images that are not segmented by LangSAM
+is_bg_image = whether it is bg segmented DIG computation or obj segmented DIG computation
 ```
 2. Region-Object Indicator: 
 ```
-which_model=[MODEL NAME]
 k_PR=3 
-which_metric=perobj_pergroup_pr 
-which_features==inceptionv3 
-which_dataset=[geode/ds]
+ref_features_path = path of referrence image features
+gen_features_path = path of generated image features
+save_metrics_path = compute metrics save path
+remove_unmasked_geode = if true, removes reference images that are not segmented by LangSAM
+is_bg_image = whether it is bg segmented DIG computation or obj segmented DIG computation
 ```
 
 
